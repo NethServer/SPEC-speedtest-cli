@@ -1,5 +1,5 @@
 Name: speedtest-cli
-Version: 0.3.0
+Version: 0.3.1
 Release: 1%{?dist}
 Summary: Command line interface for testing internet bandwidth
 
@@ -10,6 +10,7 @@ Source0: https://github.com/sivel/%{name}/archive/v%{version}.tar.gz
 BuildRequires: python2-devel
 BuildRequires: python-setuptools
 Requires: python
+Requires: python-setuptools
 BuildArch: noarch
 
 %description
@@ -35,11 +36,14 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/speedtest
 %files
 %{_bindir}/speedtest-cli
 %{python2_sitelib}/speedtest_cli.py*
-%{python2_sitelib}/speedtest_cli-0.3.0-py2.7.egg-info
+%{python2_sitelib}/speedtest_cli-%{version}-py2.7.egg-info
 %{_mandir}/man1/speedtest-cli.1.gz
 %doc CONTRIBUTING.md  LICENSE  README.rst 
 
 %changelog
+* Wed Oct 15 2014 Matias Kreder <delete@fedoraproject.org> 0.3.1-1
+- Updated to 0.3.1, added python-setuptools as a dependency
+
 * Mon Jul 14 2014 Matias Kreder <delete@fedoraproject.org> 0.3.0-1
 - Initial spec
 
