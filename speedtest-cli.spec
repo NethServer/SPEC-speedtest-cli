@@ -36,6 +36,7 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/speedtest
 %files
 %{_bindir}/speedtest-cli
 %{python3_sitelib}/speedtest_cli*
+%{python3_sitelib}/speedtest.py
 %{_mandir}/man1/speedtest-cli.1.gz
 %doc CONTRIBUTING.md  LICENSE  README.rst 
 %exclude %{python3_sitelib}/__pycache__
