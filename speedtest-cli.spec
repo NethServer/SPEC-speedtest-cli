@@ -1,47 +1,54 @@
 Name: speedtest-cli
-Version: 1.0.2
-Release: 6%{?dist}
+Version: 2.1.1
+Release: 1%{?dist}
 Summary: Command line interface for testing internet bandwidth
 
 License: ASL 2.0 
 URL: https://github.com/sivel/speedtest-cli
-Source0: https://github.com/sivel/%{name}/archive/v%{version}.tar.gz
+Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
-Requires: python3
-Requires: python3-setuptools
+
 BuildArch: noarch
 
 %description
 Command line interface for testing internet bandwidth using speedtest.net
 
 %prep
-%setup -q
+%autosetup
 sed -i -e '/^#!\//, 1d' *.py
 
 %build
-%{__python3} setup.py build
+%py3_build
 
 %install
-%{__python3} setup.py install --skip-build --root $RPM_BUILD_ROOT
-gzip speedtest-cli.1
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-install -p -m 644 speedtest-cli.1.gz $RPM_BUILD_ROOT%{_mandir}/man1/speedtest-cli.1.gz
-rm -f $RPM_BUILD_ROOT%{_bindir}/speedtest
-
-%check
-%{__python3} setup.py test
+%py3_install
+mkdir -p %{buildroot}%{_mandir}/man1/
+install -p -m 644 speedtest-cli.1 %{buildroot}%{_mandir}/man1/speedtest-cli.1
+rm -f %{buildroot}%{_bindir}/speedtest
 
 %files
+%doc CONTRIBUTING.md README.rst
+%license LICENSE
+%exclude %{python3_sitelib}/__pycache__/
 %{_bindir}/speedtest-cli
 %{python3_sitelib}/speedtest_cli*
 %{python3_sitelib}/speedtest.py
-%{_mandir}/man1/speedtest-cli.1.gz
-%doc CONTRIBUTING.md  LICENSE  README.rst 
-%exclude %{python3_sitelib}/__pycache__
+%{_mandir}/man1/speedtest-cli.1.*
+
 
 %changelog
+* Sat Jun 29 2019 Leigh Scott <leigh123linux@gmail.com> - 2.1.1-1
+- Update to 2.1.1 release
+- Remove pointless check, builders don't have internet access
+- Use python3 macros
+- Fix Source URL
+- Remove gz extension from man file
+- Don't bother compressing man file as rpmbuild does it
+- Remove unnecessary Requires
+- Spec file clean up
+
 * Sun Feb 03 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.2-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
