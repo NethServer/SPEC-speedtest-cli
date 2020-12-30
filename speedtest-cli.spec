@@ -7,8 +7,10 @@ License: ASL 2.0
 URL: https://github.com/sivel/speedtest-cli
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires: python3-devel
-BuildRequires: python3-setuptools
+Requires: python
+Requires: python-setuptools
+BuildRequires: python-devel
+BuildRequires: python-setuptools
 
 BuildArch: noarch
 
@@ -20,10 +22,10 @@ Command line interface for testing internet bandwidth using speedtest.net
 sed -i -e '/^#!\//, 1d' *.py
 
 %build
-%py3_build
+%py_build
 
 %install
-%py3_install
+%py_install
 mkdir -p %{buildroot}%{_mandir}/man1/
 install -p -m 644 speedtest-cli.1 %{buildroot}%{_mandir}/man1/speedtest-cli.1
 rm -f %{buildroot}%{_bindir}/speedtest
@@ -31,10 +33,10 @@ rm -f %{buildroot}%{_bindir}/speedtest
 %files
 %doc CONTRIBUTING.md README.rst
 %license LICENSE
-%exclude %{python3_sitelib}/__pycache__/
+%exclude %{python_sitelib}/__pycache__/
 %{_bindir}/speedtest-cli
-%{python3_sitelib}/speedtest_cli*
-%{python3_sitelib}/speedtest.py
+%{python_sitelib}/speedtest_cli*
+%{python_sitelib}/speedtest.py*
 %{_mandir}/man1/speedtest-cli.1.*
 
 
