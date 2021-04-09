@@ -1,5 +1,5 @@
 Name: speedtest-cli
-Version: 2.1.2
+Version: 2.1.3
 Release: 1%{?dist}
 Summary: Command line interface for testing internet bandwidth
 
@@ -39,6 +39,9 @@ rm -f %{buildroot}%{_bindir}/speedtest
 
 
 %changelog
+* Fri Apr 9 2021 stephane de Labrusse <stephdl@de-labrusse.fr> - 2.1.3-1
+- Update to 2.1.3
+
 * Tue Nov 24 2020 Michael Cronenworth <mike@cchtml.com> - 2.1.2-1
 - Update to 2.1.2 release
 
